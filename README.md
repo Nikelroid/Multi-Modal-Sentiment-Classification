@@ -5,5 +5,5 @@ Course: Deep learning, Dr.Fatemizadeh, EE department of Sharif University of Tec
 Participants:
 > Ali Abbasi, 98105879 <br/>
 > Nima Kelidari, 98108124 <br/>
-> Amir Ahmad Shafei, 99104027 <br/>
+> Amir Ahmad Shafiee, 99104027 <br/>
 
