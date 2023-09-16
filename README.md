@@ -1,9 +1,27 @@
-# DeepLearning_Project
-This repository is for developing and sharing deep learning project.<br/>
-Course: Deep learning, Dr.Fatemizadeh, EE department of Sharif University of Technology <br/>
+# Multimodal Sentiment analysis
+## Sharif University of Technology <br/> EE Dept. <br/> Deep Learning Course<br/> Dr. E. Fatemizadeh
 
-Participants:
-> Ali Abbasi, 98105879 <br/>
-> Nima Kelidari, 98108124 <br/>
-> Amir Ahmad Shafiee, 99104027 <br/>
+**Participants**:<br/>
+> Ali Abbasi <br/>
+> Nima Kelidari <br/>
+> Amir Ahmad Shafiee
+
+**Description**: With the rise of data science methods in almose all important and handy aspects of every-day life, emerges the importance of cross-modal learning methods. This leads to the main idea behind this project.
+**Supplementary information**:
+>**Main-models**: Bert-base uncased, VGG Face
+>**Dataset**: CLIP dataset
+>**Modes**: Text, Image
+>**Final model**: Transformers,
+>During the process, CV methods, NLP methods and a combination of both, implemented first, by a transformers-bsed model, and by the use of weak supervised learning, have been examined and implemented.
+
+**Tags**:
+* Computer Vision
+* NLP
+* Bert
+* Sentiment Analysis
+* Multimodal
+* Transformers
+* Weak Supervised Learning
+* Representation Learning
+
 
