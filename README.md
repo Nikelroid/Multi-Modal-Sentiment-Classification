@@ -13,7 +13,7 @@
 >**Dataset**: CLIP dataset<br/>
 >**Modes**: Text, Image<br/>
 >**Final model**: Transformers,<br/>
->During the process, CV methods, NLP methods and a combination of both, implemented first, by a transformers-bsed model, and by the use of weak supervised learning, have been examined and implemented.<br/>
+>**Desc**: During the process, CV methods, NLP methods and a combination of both, implemented first, by a transformers-bsed model, and by the use of weak supervised learning, have been examined and implemented.<br/>
 
 **Tags**:<br/>
 * Computer Vision
