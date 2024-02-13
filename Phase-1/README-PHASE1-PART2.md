@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-<!-- Mount Google Drive -->
+<div>
+<h2>Facial Expression Prediction Model Training Pipeline</h2>
+<p>This Python script orchestrates a comprehensive pipeline for training a facial expression prediction model using the Multi-Scene Character Text Dataset (MSCTD). Initially, the script sets up the environment by mounting Google Drive and navigating to the project directory. It then proceeds to download and organize the dataset, consisting of images and corresponding textual descriptions, essential for training the model. Leveraging the PyTorch library, the script defines a custom dataset class, MSCTD_Dataset, tailored to handle the dataset's structure and facilitate efficient data loading. Augmentation techniques such as resizing, normalization, and data shuffling are applied to enhance the dataset's diversity and improve model generalization. The pipeline encompasses model training and evaluation stages, employing a pre-trained EfficientNet-B2 architecture fine-tuned for facial expression prediction. Throughout training, performance metrics including accuracy and loss are monitored and visualized, enabling insightful analysis of the model's learning dynamics. Finally, the script saves the trained model weights for future use, ensuring reproducibility and scalability of the facial expression prediction solution.</p>
+</div>
+
+
 <div>
 <h2>Mount Google Drive</h2>
 <p>This code mounts Google Drive to the Colab environment. It's necessary for accessing files stored in Google Drive.</p>
