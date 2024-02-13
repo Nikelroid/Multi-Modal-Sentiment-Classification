@@ -1,165 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>README</title>
 </head>
 <body>
-    <h1>Multilingual Sentiment Analysis and Face Recognition</h1>
+<!-- Mount Google Drive -->
+<div>
+<h2>Mount Google Drive</h2>
+<p>This code mounts Google Drive to the Colab environment. It's necessary for accessing files stored in Google Drive.</p>
+<pre><code>from google.colab import drive</code></pre>
+<pre><code>drive.mount('/content/drive')</code></pre>
+<pre><code>%cd drive/My Drive/</code></pre>
+</div>
 
-    <p>This repository contains code for a project involving sentiment analysis on multilingual text data and face recognition using CNN models.</p>
+<!-- Copy Files and Clone Repository -->
+<div>
+<h2>Copy Files and Clone Repository</h2>
+<p>This section copies necessary files and clones a GitHub repository.</p>
+<pre><code>!cp train_ende.zip .</code></pre>
+<pre><code>!cp test.zip .</code></pre>
+<pre><code>! git clone https://github.com/XL2248/</code></pre>
+<pre><code>!cp MSCTD/MSCTD_data/ende/english_*.txt .</code></pre>
+<pre><code>!cp MSCTD/MSCTD_data/ende/image_index_*.txt .</code></pre>
+<pre><code>!cp MSCTD/MSCTD_data/ende/sentiment_*.txt .</code></pre>
+<pre><code>!pip install --upgrade --no-cache-dir gdown</code></pre>
+<pre><code>!gdown --id 1GAZgPpTUBSfhne-Tp0GDkvSHuq6EMMbj</code></pre>
+<pre><code>!gdown --id 1B9ZFmSTqfTMaqJ15nQDrRNLqBvo-B39W</code></pre>
+</div>
 
-    <h2>Installation</h2>
-    <p>To run the code, follow these steps:</p>
-    <ol>
-        <li>Mount Google Drive:</li>
-        <pre><code>from google.colab import drive
-drive.mount('/content/drive')
-%cd drive/My Drive/</code></pre>
-        <li>Clone the repository:</li>
-        <pre><code>! git clone https://github.com/XL2248/</code></pre>
-        <li>Install required dependencies:</li>
-        <pre><code>!pip install --upgrade --no-cache-dir gdown
-!pip install mtcnn
-!pip install git+https://github.com/elliottzheng/face-detection.git@master
-!pip install einops --upgrade</code></pre>
-    </ol>
+<!-- Unzip Files -->
+<div>
+<h2>Unzip Files</h2>
+<p>This part unzips the downloaded zip files.</p>
+<pre><code>%%bash</code></pre>
+<pre><code>for x in *.zip</code></pre>
+<pre><code>do</code></pre>
+<pre><code>  unzip -qq $x</code></pre>
+<pre><code>done;</code></pre>
+</div>
 
-    <h2>Data Preparation</h2>
-    <p>The data is organized into train, test, and dev sets in the 'dataset' directory.</p>
+<!-- Create Dataset Directory -->
+<div>
+<h2>Create Dataset Directory</h2>
+<p>This section creates a directory for the dataset.</p>
+<pre><code>!mkdir dataset</code></pre>
+<pre><code>!cd dataset; mkdir train test dev</code></pre>
+<pre><code>!mv *train* dataset/train</code></pre>
+<pre><code>!mv *test* dataset/test</code></pre>
+<pre><code>!mv *dev* dataset/dev</code></pre>
+</div>
 
-    <h3>MSCTD Dataset</h3>
-    <p>The MSCTD dataset is used for sentiment analysis, consisting of English-German parallel text data along with image indices and sentiment labels.</p>
+<!-- Dataset and Dataloader -->
+<div>
+<h2>Dataset and Dataloader</h2>
+<p>This part sets up the dataset and dataloader for training and testing the model.</p>
+<pre><code>import torch</code></pre>
+<pre><code>from torchvision import transforms as T</code></pre>
+<pre><code>from PIL import Image</code></pre>
+<pre><code>import os</code></pre>
+<pre><code>from pathlib import Path</code></pre>
+<pre><code>import numpy as np</code></pre>
+<pre><code>from torch.utils.data import Dataset, DataLoader</code></pre>
+<pre><code>import torchvision.transforms as transforms</code></pre>
+<pre><code>transform = transforms.Compose([</code></pre>
+<pre><code>    transforms.ToTensor(),</code></pre>
+<pre><code>    transforms.Resize((288,288), interpolation=Image.BICUBIC),</code></pre>
+<pre><code>    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])</code></pre>
+<pre><code>])</code></pre>
+</div>
 
-    <h3>Face Dataset</h3>
-    <p>A custom dataset is created for face recognition, with images stored in the 'train/faces' and 'test/faces' directories.</p>
+<!-- Define MSCTD Dataset Class -->
+<div>
+<h2>Define MSCTD Dataset Class</h2>
+<p>This section defines the MSCTD dataset class.</p>
+<pre><code>class MSCTD_Dataset (Dataset):</code></pre>
+<pre><code>  def __init__(self, dataset_dir, images_dir, conversation_dir, texts, sentiments, transform=None):</code></pre>
+<pre><code>    # Constructor code...</code></pre>
+<pre><code>  def __len__(self):</code></pre>
+<pre><code>    # __len__ method code...</code></pre>
+<pre><code>  def __getitem__(self, idx):</code></pre>
+<pre><code>    # __getitem__ method code...</code></pre>
+</div>
 
-    <h2>Usage</h2>
-    <p>After preparing the data, the code can be executed to train and evaluate the models.</p>
+<!-- Define Face_Dataset Class -->
+<div>
+<h2>Define Face_Dataset Class</h2>
+<p>This section defines the Face_Dataset class.</p>
+<pre><code>class Face_Dataset(Dataset):</code></pre>
+<pre><code>  def __init__(self, path, transform):</code></pre>
+<pre><code>    # Constructor code...</code></pre>
+<pre><code>  def __len__(self):</code></pre>
+<pre><code>    # __len__ method code...</code></pre>
+<pre><code>  def __getitem__(self, idx):</code></pre>
+<pre><code>    # __getitem__ method code...</code></pre>
+</div>
 
-    <h3>Phase 1: Localization and CNN Model</h3>
-    <p>The code comprises the following phases:</p>
-    <ol>
-        <li>Face Extraction: Utilizes RetinaFace for face detection and extracts faces from images.</li>
-        <li>CNN Model Training: Trains a CNN model using EfficientNet-B2 architecture for face recognition.</li>
-    </ol>
+<!-- Train the Model -->
+<div>
+<h2>Train the Model</h2>
+<p>This section trains the model for a specified number of epochs.</p>
+<pre><code>def train_epoch(net: nn.Module, criterion: nn.Module, optimizer: torch.optim.Optimizer, dataloader: torch.utils.data.DataLoader,   accs_train ,loss_train):</code></pre>
+<pre><code>  # train_epoch method code...</code></pre>
+<pre><code>def eval_epoch(net: nn.Module, criterion: nn.Module, dataloader: torch.utils.data.DataLoader,    accs_test ,loss_test ):</code></pre>
+<pre><code>  # eval_epoch method code...</code></pre>
+</div>
 
-    <h2>Results</h2>
-    <p>The model's performance is evaluated based on loss and accuracy metrics.</p>
+<!-- Define Model Architecture -->
+<div>
+<h2>Define Model Architecture</h2>
+<p>This section defines the architecture of the last layer of the model.</p>
+<pre><code>class lastLayer(nn.Module):</code></pre>
+<pre><code>  def __init__(self, pretrained):</code></pre>
+<pre><code>    # Constructor code...</code></pre>
+<pre><code>  def forward(self, x):</code></pre>
+<pre><code>    # forward method code...</code></pre>
+</div>
 
-    <h3>Face Model Loss</h3>
-    <p><img src="path/to/face_model_loss_plot" alt="Face Model Loss Plot"></p>
+<!-- Plot Model Loss -->
+<div>
+<h2>Plot Model Loss</h2>
+<p>This section plots the training and testing losses.</p>
+<pre><code>import matplotlib.pyplot as plt</code></pre>
+<pre><code>plt.plot(np.array(loss_test), 'r')</code></pre>
+<pre><code>plt.plot(np.array(loss_train), 'b')</code></pre>
+<pre><code>plt.title('Face Model loss')</code></pre>
+<pre><code>plt.ylabel('Loss')</code></pre>
+<pre><code>plt.xlabel('Epoch')</code></pre>
+<pre><code>plt.legend(['Test', 'Train'])</code></pre>
+<pre><code>plt.show()</code></pre>
+</div>
 
-    <h3>Face Model Accuracy</h3>
-    <p><img src="path/to/face_model_accuracy_plot" alt="Face Model Accuracy Plot"></p>
+<!-- Plot Model Accuracy -->
+<div>
+<h2>Plot Model Accuracy</h2>
+<p>This section plots the training and testing accuracies.</p>
+<pre><code>plt.plot(np.array(accs_test), 'r')</code></pre>
+<pre><code>plt.plot(np.array(accs_train), 'b')</code></pre>
+<pre><code>plt.title('Face Model Accuracy')</code></pre>
+<pre><code>plt.ylabel('Accuracy')</code></pre>
+<pre><code>plt.xlabel('Epoch')</code></pre>
+<pre><code>plt.legend(['Test', 'Train'])</code></pre>
+<pre><code>plt.show()</code></pre>
+</div>
 
-    <h2>Contributing</h2>
-    <p>Contributions are welcome. For major changes, please open an issue first to discuss potential improvements.</p>
+<!-- Confusion Matrix -->
+<div>
+<h2>Confusion Matrix</h2>
+<p>This part creates a confusion matrix to evaluate the model's performance.</p>
+<pre><code>from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay</code></pre>
+<pre><code>cm = confusion_matrix(truth, predict)</code></pre>
+<pre><code>disp = ConfusionMatrixDisplay(cm,display_labels=['Positive','Neutral','Negative'])</code></pre>
+<pre><code>fig, ax = plt.subplots(figsize=(8,8))</code></pre>
+<pre><code>ax.set_title('Confusion Matrix for Face modal',fontweight="bold", size=20)</code></pre>
+<pre><code>ax.set_ylabel('Pred',fontweight="bold", fontsize = 10.0)</code></pre>
+<pre><code>ax.set_xlabel('True',fontweight="bold", fontsize = 10)</code></pre>
+<pre><code>disp.plot(ax=ax)</code></pre>
+</div>
 
-    <h2>License</h2>
-    <p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
+</body>
+</html>
 
-    <h2>Python Code</h2>
-    <pre><code>main_detector = RetinaFace()
-def face_detector(image):
-    faces_boundaries = main_detector(image)
-    faces = []
-    for i in range(len(faces_boundaries)):
-      stats, _, score = faces_boundaries[i]
-      stats = stats.astype(int)
-      if score>0.95:
-        faces.append(Image.fromarray(image[max(0,stats[1]):min(image.shape[0],stats[3]),
-                                           max(0,stats[0]):min(image.shape[1],stats[2])]))
-    return faces
-
-class Face_Dataset_eval(Dataset):
-  def __init__(self, images,trasnform):
-    self.images = images
-    self.transform = transform
-    
-  def __len__(self):
-        return len(self.images)
-
-
-  def __getitem__(self, idx):
-        image = self.images[idx]
-        if self.transform:
-            image = self.transform(image)
-        return image
-def statical_random_generator(counter):
-  r = np.random.random(1)
-  if r<counter[0]:
-    return 0
-  elif r<(counter[0]+counter[1]):
-    return 1
-  else:
-    return 2
-def predict_mode(image,transform,counter):
-  predictions = []
-  faces = face_detector(np.array(image.convert('RGB')))
-  dataset_face_eval = Face_Dataset_eval(faces,transform)
-  if (len(faces)==0):
-    return 1
-  testface_loader = torch.utils.data.DataLoader(dataset_face_eval, batch_size=len(faces), shuffle=False, num_workers=2)
-  for x in testface_loader:
-      predictions = net(x.to(device)).float().argmax(-1)
-  if 0 in predictions and not  2 in predictions:
-    return 0
-  elif 2 in predictions and not  0 in predictions:
-    return 2
-  elif 2 in predictions or 0 in predictions:
-    return statical_random_generator(counter)
-  else:
-    return 1
-labels = np.vectorize(lambda t: ['Neutral' , 'Negative' , 'Positive'][t])(testset.sentiments)
-m = {'Neutral':0,'Negative':1,'Positive':2}
-lab_set = [m[k] for k in labels]
-counter=[0,0,0]
-for lab in tqdm(lab_set):
-  counter[lab]+=1
-from collections import Counter
-from tqdm import tqdm
-from torchvision import transforms
-truth = []
-predict = []
-net.load_state_dict(torch.load("models/face_modal.pth",map_location=torch.device('cpu')))
-transform = transforms.Compose([transforms.ToTensor()
-                                ,transforms.Resize((288,288),transforms.InterpolationMode("bicubic"))
-                                ,transforms.Normalize([0.485, 0.456, 0.406],[0.229, 0.224, 0.225])])
-                                
-counter = np.array(counter)
-counter = np.divide(counter,np.sum(counter))
-for i in tqdm(range(len(testset)),total = len(testset)-4501):
-  _,image,_ = testset[i]
-  p = predict_mode(image,transform,counter)
-  truth.append(sentiment)
-  predict.append(p)
-# pbar.set_description(f"Accuracy: {np.sum(np.array(truth) == np.array(predict))/len(truth)*100:.2f}%")
-  if i%500== 0 and i != 0:
-    with open("models/Truth_results_face_without_augment"+str(int(i/500))+".txt", 'wb') as f:
-          pickle.dump(truth, f)
-    with open("models/Pred_results_face_without_augment"+str(int(i/500))+".txt", 'wb') as f:
-          pickle.dump(predict, f)
-    truth = []
-    predict = []
-with open("models/Pred_results_face_without_augment11.txt", 'wb') as f:
-      pickle.dump(predict, f)
-
-with open("models/Truth_results_face_without_augment11.txt", 'wb') as f:
-      pickle.dump(truth, f)
-# test_data = pickle.load(open('test_data.pkl', 'rb'))
-# # Evaluation
-# model.eval()
-# with torch.no_grad():
-#     for inputs, labels in test_loader:
-#         inputs, labels = inputs.to(device), labels.to(device)
-#         outputs = model(inputs)
-#         _, predicted = torch.max(outputs, 1)
-#         total += labels.size(0)
-#         correct += (predicted == labels).sum().item()
-# print('Accuracy of the network on the test images: %d %%' % (
-#     100 * correct / total))
-</code></pre>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>README</title>
+</head>
+<body>
+<!-- Third step: data augmentation -->
+<div>
+<h2>Third step: data augmentation</h2>
+<pre><code>from torch import nn</code></pre>
+<pre><code>import torch</code></pre>
+<pre><code>coefs = torch.rand(3)</code></pre>
+<pre><code>c= nn.Softmax(dim=0)(coefs)</code></pre>
+<pre><code>print(coefs)</code></pre>
+<pre><code>print(c)</code></pre>
+<pre><code>!pip install einops --upgrade</code></pre>
+<pre><code>import numpy as np</code></pre>
+<pre><code>import torch</code></pre>
+<pre><code>from einops import parse_shape, rearrange</code></pre>
+<pre><code>class RandomFilter(torch.nn.Module):</code></pre>
+<pre><code>    # Class definition...</code></pre>
+<pre><code>class RandomSmoothColor(torch.nn.Module):</code></pre>
+<pre><code>    # Class definition...</code></pre>
+<pre><code>class Diffeo(torch.nn.Module):</code></pre>
+<pre><code>    # Class definition...</code></pre>
+<pre><code>@functools.lru_cache()</code></pre>
+<pre><code>def scalar_field_modes(n, m, dtype=torch.float64, device='cpu'):</code></pre>
+<pre><code>    # scalar_field_modes function definition...</code></pre>
+<pre><code>def scalar_field(n, m, device='cpu'):</code></pre>
+<pre><code>    # scalar_field function definition...</code></pre>
+<pre><code>def deform(image, T, cut, interp='linear'):</code></pre>
+<pre><code>    # deform function definition...</code></pre>
+<pre><code>def remap(a, dx, dy, interp):</code></pre>
+<pre><code>    # remap function definition...</code></pre>
+<pre><code>def temperature_range(n, cut):</code></pre>
+<pre><code>    # temperature_range function definition...</code></pre>
+<pre><code>COLOURCURR = RandomSmoothColor(100,0.01).to(device)</code></pre>
+<pre><code>spectral = Diffeo(1., 1., 1., 1., 2, 100, 1.0).to(device)</code></pre>
+<pre><code>spatial = RandomFilter(3,1).to(device)</code></pre>
+<pre><code>def augment(images,tr):</code></pre>
+<pre><code>    # augment function definition...</code></pre>
+<pre><code>transform = transforms.Compose([transforms.ToTensor(),transforms.Normalize([0.485, 0.456, 0.406],[0.229, 0.224, 0.225])])</code></pre>
+<pre><code>aug_face_trainset = Face_Dataset('dataset/train/aug',transform)</code></pre>
+<pre><code>aug_face_testset = Face_Dataset('dataset/test/aug',transform)</code></pre>
+<pre><code>aug_trainface_loader = torch.utils.data.DataLoader(aug_face_trainset, batch_size=64, shuffle=True, num_workers=2)</code></pre>
+<pre><code>aug_testface_loader = torch.utils.data.DataLoader(aug_face_testset, batch_size=64, shuffle=False, num_workers=2)</code></pre>
+<pre><code>def train_epoch(net: nn.Module, criterion: nn.Module, optimizer: torch.optim.Optimizer, dataloader: torch.utils.data.DataLoader,   accs_train ,loss_train):</code></pre>
+<pre><code>    # train_epoch function definition...</code></pre>
+<pre><code>def eval_epoch(net: nn.Module, criterion: nn.Module, dataloader: torch.utils.data.DataLoader,    accs_test ,loss_test ):</code></pre>
+<pre><code>    # eval_epoch function definition...</code></pre>
+<pre><code>device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")</code></pre>
+<pre><code>class lastLayer(nn.Module):</code></pre>
+<pre><code>    # lastLayer class definition...</code></pre>
+<pre><code>net = efficientnet_b2(weights=EfficientNet_B2_Weights.IMAGENET1K_V1)</code></pre>
+<pre><code>net.classifier = nn.Sequential()</code></pre>
+<pre><code>net = lastLayer(net).to(device)</code></pre>
+<pre><code>criterion = nn.CrossEntropyLoss().to(device)</code></pre>
+<pre><code>params_to_update = []</code></pre>
+<pre><code>for name,param in net.named_parameters():</code></pre>
+<pre><code>    params_to_update.append(param)</code></pre>
+<pre><code>optimizer = torch.optim.RMSprop(params_to_update, lr=5e-4)</code></pre>
+<pre><code>epochs = 20</code></pre>
+<pre><code>from time import time</code></pre>
+<pre><code>accs_train = []</code></pre>
+<pre><code>loss_train = []</code></pre>
+<pre><code>accs_test = []</code></pre>
+<pre><code>loss_test = []</code></pre>
+<pre><code>net.load_state_dict(torch.load("models/face_modal.pth"))</code></pre>
+<pre><code>for e in range(epochs):</code></pre>
+<pre><code>    # Training loop...</code></pre>
+<pre><code>print(f'Best Accuracy :{max(accs_test) * 100.:.2f}%')</code></pre>
+<pre><code>plt.plot(np.array(loss_test), 'r')</code></pre>
+<pre><code>plt.plot(np.array(loss_train), 'b')</code></pre>
+<pre><code>plt.title('Face Model loss')</code></pre>
+<pre><code>plt.ylabel('Loss')</code></pre>
+<pre><code>plt.xlabel('Epoch')</code></pre>
+<pre><code>plt.legend(['Test', 'Train'])</code></pre>
+<pre><code>plt.show()</code></pre>
+<pre><code>plt.plot(np.array(accs_test), 'r')</code></pre>
+<pre><code>plt.plot(np.array(accs_train), 'b')</code></pre>
+<pre><code>plt.title('Face Model Accuracy')</code></pre>
+<pre><code>plt.ylabel('Accuracy')</code></pre>
+<pre><code>plt.xlabel('Epoch')</code></pre>
+<pre><code>plt.legend(['Test', 'Train'])</code></pre>
+<pre><code>plt.show()</code></pre>
+</div>
 </body>
 </html>
