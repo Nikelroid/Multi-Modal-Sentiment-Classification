@@ -39,9 +39,7 @@ drive.mount(<span class="token string">'/content/drive'</span>)
 
 <p>For textual sentiment analysis, we utilize a pre-trained model to extract features from text data. These features are then fed into a fully connected neural network for sentiment prediction.</p>
 
-<pre><code class="language-python">...
-<span class="token comment"># Textual Sentiment Analysis Code Block</span>
-<span class="token comment"># ...</span>
+<pre><code class="language-python">
 
 <span class="token comment"># Example: Defining and training the textual sentiment analysis model</span>
 <span class="token keyword">class</span> TextSentimentModel(nn.Module):
