@@ -5,7 +5,7 @@
 
 
 <div>
-<h2>Mount Google Drive</h2>
+<h2>Part 0: Mount Google Drive</h2>
 <p>This code mounts Google Drive to the Colab environment. It's necessary for accessing files stored in Google Drive.</p>
 <pre><code>from google.colab import drive</code></pre>
 <pre><code>drive.mount('/content/drive')</code></pre>
@@ -13,7 +13,7 @@
 
 <!-- Change Directory -->
 <div>
-<h2>Change Directory</h2>
+<h2>Part 1: Change Directory</h2>
 <p>This section changes the directory to the project directory and performs initial setup tasks like copying files, cloning repositories, and unzipping datasets.</p>
 <pre><code>%cd drive/My Drive/deep_learning/Project</code>
 <em>Run this just for the first time:</em>
@@ -40,7 +40,7 @@
 
 <!-- Dataset and Dataloader -->
 <div>
-<h2>Dataset and Dataloader</h2>
+<h2>Part 2: Dataset and Dataloader</h2>
 <p>This part involves setting up the dataset and dataloader for training and testing the model.</p>
 <pre><code>import torch</code>
 <code>from torchvision import transforms as T</code>
@@ -63,7 +63,7 @@
 
 <!-- Define Model Architecture -->
 <div>
-<h2>Define Model Architecture</h2>
+<h2>Part 3: Define Model Architecture</h2>
 <p>This section defines the architecture of the last layer of the model.</p>
 <pre><code>class lastLayer(nn.Module):</code>
 <code>    def __init__(self, pretrained):</code>
@@ -85,7 +85,7 @@
 
 <!-- Set Trainable Parameters -->
 <div>
-<h2>Set Trainable Parameters</h2>
+<h2>Part 4: Set Trainable Parameters</h2>
 <p>This part sets the parameters to be updated during training.</p>
 <pre><code>params_to_update = []</code>
 <code>for name, param in net.named_parameters():</code>
@@ -96,7 +96,7 @@
 
 <!-- Train the Model -->
 <div>
-<h2>Train the Model</h2>
+<h2>Part 5: Train the Model</h2>
 <p>This section trains the model for a specified number of epochs.</p>
 <pre><code>epochs = 20</code>
 <code>from time import time</code>
@@ -116,7 +116,7 @@
 
 <!-- Plot Model Loss -->
 <div>
-<h2>Plot Model Loss</h2>
+<h2>Part 6: Plot Model Loss</h2>
 <p>This section plots the training and testing losses.</p>
 <pre><code>import matplotlib.pyplot as plt</code>
 <code>plt.plot(np.array(loss_test), 'r')</code>
@@ -131,7 +131,7 @@
 
 <!-- Plot Model Accuracy -->
 <div>
-<h2>Plot Model Accuracy</h2>
+<h2>Part 7: Plot Model Accuracy</h2>
 <p>This section plots the training and testing accuracies.</p>
 <pre><code>plt.plot(np.array(accs_test), 'r')</code>
 <code>plt.plot(np.array(accs_train), 'b')</code>
@@ -145,7 +145,7 @@
 
 <!-- Best Accuracy -->
 <div>
-<h2>Best Accuracy</h2>
+<h2>Part 8: Best Accuracy</h2>
 <p>This part displays the best accuracy achieved during training.</p>
 <pre><code>print(f'Best Accuracy :{max(accs_test) * 100.:.2f}%')</code></pre>
 </div>
