@@ -1,5 +1,5 @@
 <div>
-<h2>README for Phase 1 - Part 1</h2>
+<h2>Phase 1 - Part 1 : Facial Expression Recognition Pipeline with Data Augmentation</h2>
 <p> This code focuses on the initial steps of preparing data for a facial expression prediction model. The primary objective is to extract faces from images, a crucial step in accurately predicting facial expressions from images. By isolating and extracting facial regions, the subsequent model can focus solely on analyzing the features relevant to facial expressions, improving prediction accuracy.</p>
 </div>
 
