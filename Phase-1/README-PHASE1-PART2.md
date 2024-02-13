@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>README</title>
 </head>
 <body>
 <!-- Mount Google Drive -->
@@ -79,11 +78,11 @@
 <code>            nn.Linear(90, 30),</code>
 <code>            nn.Dropout(p=0.1, inplace=True),</code>
 <code>            nn.Linear(30, 3)</code>
-<code>        )</code></pre>
+<code>        )</code>
 <code>    def forward(self, x):</code>
 <code>        x = self.pretrained(x)</code>
 <code>        x = self.last(x)</code>
-<code>        return x</code>
+<code>        return x</code></pre>
 </div>
 
 <!-- Set Trainable Parameters -->
