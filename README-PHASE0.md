@@ -2,6 +2,10 @@
 
 <p>MSCTD is a tool designed for multi-modal sentiment analysis and time dynamics exploration in image-text conversations. It provides functionalities to preprocess data, create datasets, perform sentiment analysis, visualize sentiments, analyze text lengths, and explore time patterns within conversations.</p>
 
+<h2>Phase 0: Define Dataloader</h2>
+
+<p>In this phase, we prepare a appropriate data loader for load data from memory. This class can get used in next phases.</p>
+
 <h2>Getting Started</h2>
 
 <p>To use MSCTD, follow these steps:</p>
