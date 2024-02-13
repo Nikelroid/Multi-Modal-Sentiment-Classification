@@ -9,7 +9,7 @@
 <body>
 <!-- Mount Google Drive -->
 <div>
-<h2>Mount Google Drive</h2>
+<h2>Part 0: Mount Google Drive</h2>
 <p>This code mounts Google Drive to the Colab environment. It's necessary for accessing files stored in Google Drive.</p>
 <pre><code>from google.colab import drive</code>
 <code>drive.mount('/content/drive')</code>
@@ -18,7 +18,7 @@
 
 <!-- Copy Files and Clone Repository -->
 <div>
-<h2>Copy Files and Clone Repository</h2>
+<h2>Part 1: Copy Files and Clone Repository</h2>
 <p>This section copies necessary files and clones a GitHub repository.</p>
 <pre><code>!cp train_ende.zip .</code>
 <code>!cp test.zip .</code>
@@ -33,7 +33,7 @@
 
 <!-- Unzip Files -->
 <div>
-<h2>Unzip Files</h2>
+<h2>Part 2: Unzip Files</h2>
 <p>This part unzips the downloaded zip files.</p>
 <pre><code>%%bash</code>
 <code>for x in *.zip</code>
@@ -44,7 +44,7 @@
 
 <!-- Create Dataset Directory -->
 <div>
-<h2>Create Dataset Directory</h2>
+<h2>Part 3: Create Dataset Directory</h2>
 <p>This section creates a directory for the dataset.</p>
 <pre><code>!mkdir dataset</code>
 <code>!cd dataset; mkdir train test dev</code>
@@ -55,7 +55,7 @@
 
 <!-- Dataset and Dataloader -->
 <div>
-<h2>Dataset and Dataloader</h2>
+<h2>Part 4: Dataset and Dataloader</h2>
 <p>This part sets up the dataset and dataloader for training and testing the model.</p>
 <pre><code>import torch</code>
 <code>from torchvision import transforms as T</code>
@@ -74,7 +74,7 @@
 
 <!-- Define MSCTD Dataset Class -->
 <div>
-<h2>Define MSCTD Dataset Class</h2>
+<h2>Part 5: Define MSCTD Dataset Class</h2>
 <p>This section defines the MSCTD dataset class.</p>
 <pre><code>class MSCTD_Dataset (Dataset):</code>
 <code>  def __init__(self, dataset_dir, images_dir, conversation_dir, texts, sentiments, transform=None):</code>
@@ -87,7 +87,7 @@
 
 <!-- Define Face_Dataset Class -->
 <div>
-<h2>Define Face_Dataset Class</h2>
+<h2>Part 6: Define Face_Dataset Class</h2>
 <p>This section defines the Face_Dataset class.</p>
 <pre><code>class Face_Dataset(Dataset):</code>
 <code>  def __init__(self, path, transform):</code>
@@ -100,7 +100,7 @@
 
 <!-- Train the Model -->
 <div>
-<h2>Train the Model</h2>
+<h2>Part 7: Train the Model</h2>
 <p>This section trains the model for a specified number of epochs.</p>
 <pre><code>def train_epoch(net: nn.Module, criterion: nn.Module, optimizer: torch.optim.Optimizer, dataloader: torch.utils.data.DataLoader,   accs_train ,loss_train):</code>
 <code>  # train_epoch method code...</code>
@@ -110,7 +110,7 @@
 
 <!-- Define Model Architecture -->
 <div>
-<h2>Define Model Architecture</h2>
+<h2>Part 8: Define Model Architecture</h2>
 <p>This section defines the architecture of the last layer of the model.</p>
 <pre><code>class lastLayer(nn.Module):</code>
 <code>  def __init__(self, pretrained):</code>
@@ -121,7 +121,7 @@
 
 <!-- Plot Model Loss -->
 <div>
-<h2>Plot Model Loss</h2>
+<h2>Part 9: Plot Model Loss</h2>
 <p>This section plots the training and testing losses.</p>
 <pre><code>import matplotlib.pyplot as plt</code>
 <code>plt.plot(np.array(loss_test), 'r')</code>
@@ -135,7 +135,7 @@
 
 <!-- Plot Model Accuracy -->
 <div>
-<h2>Plot Model Accuracy</h2>
+<h2>Part 10: Plot Model Accuracy</h2>
 <p>This section plots the training and testing accuracies.</p>
 <pre><code>plt.plot(np.array(accs_test), 'r')</code>
 <code>plt.plot(np.array(accs_train), 'b')</code>
@@ -148,7 +148,7 @@
 
 <!-- Confusion Matrix -->
 <div>
-<h2>Confusion Matrix</h2>
+<h2>Part 11: Confusion Matrix</h2>
 <p>This part creates a confusion matrix to evaluate the model's performance.</p>
 <pre><code>from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay</code>
 <code>cm = confusion_matrix(truth, predict)</code>
@@ -160,85 +160,144 @@
 <code>disp.plot(ax=ax)</code></pre>
 </div>
 
+<!-- Part 1: Imports and Setup -->
+<div>
+<h2>Part 12: Imports and Setup</h2>
+<p>This part includes the necessary imports and setup for the code.</p>
+<pre><code>from torch import nn</code></pre>
+<pre><code>import torch</code></pre>
+<pre><code>coefs = torch.rand(3)</code></pre>
+<pre><code>c= nn.Softmax(dim=0)(coefs)</code></pre>
+<pre><code>print(coefs)</code></pre>
+<pre><code>print(c)</code></pre>
+<pre><code>!pip install einops --upgrade</code></pre>
+<pre><code>import numpy as np</code></pre>
+<pre><code>import torch</code></pre>
+<pre><code>from einops import parse_shape, rearrange</code></pre>
+</div>
+
+<!-- Part 2: Definition of RandomFilter, RandomSmoothColor, and Diffeo Classes -->
+<div>
+<h2>Part 13: Definition of RandomFilter, RandomSmoothColor, and Diffeo Classes</h2>
+<p>This part contains the definitions of the RandomFilter, RandomSmoothColor, and Diffeo classes.</p>
+<pre><code>class RandomFilter(torch.nn.Module):</code></pre>
+<pre><code>    # RandomFilter class definition...</code></pre>
+<pre><code>class RandomSmoothColor(torch.nn.Module):</code></pre>
+<pre><code>    # RandomSmoothColor class definition...</code></pre>
+<pre><code>class Diffeo(torch.nn.Module):</code></pre>
+<pre><code>    # Diffeo class definition...</code></pre>
+</div>
+
+<!-- Part 3: Helper Functions and Temperature Calculation -->
+<div>
+<h2>Part 14: Helper Functions and Temperature Calculation</h2>
+<p>This part includes helper functions and temperature calculation functions used in the code.</p>
+<pre><code>@functools.lru_cache()</code></pre>
+<pre><code>def scalar_field_modes(n, m, dtype=torch.float64, device='cpu'):</code></pre>
+<pre><code>    # scalar_field_modes function definition...</code></pre>
+<pre><code>def scalar_field(n, m, device='cpu'):</code></pre>
+<pre><code>    # scalar_field function definition...</code></pre>
+<pre><code>def deform(image, T, cut, interp='linear'):</code></pre>
+<pre><code>    # deform function definition...</code></pre>
+<pre><code>def remap(a, dx, dy, interp):</code></pre>
+<pre><code>    # remap function definition...</code></pre>
+<pre><code>def temperature_range(n, cut):</code></pre>
+<pre><code>    # temperature_range function definition...</code></pre>
+</div>
+
+<!-- Part 4: Initialization of Color, Spectral, and Spatial Transformation -->
+<div>
+<h2>Part 15: Initialization of Color, Spectral, and Spatial Transformation</h2>
+<p>This part initializes the color, spectral, and spatial transformation objects.</p>
+<pre><code>COLOURCURR = RandomSmoothColor(100,0.01).to(device)</code></pre>
+<pre><code>spectral = Diffeo(1., 1., 1., 1., 2, 100, 1.0).to(device)</code></pre>
+<pre><code>spatial = RandomFilter(3,1).to(device)</code></pre>
+</div>
+
+<!-- Part 5: Data Augmentation -->
+<div>
+<h2>Part 16: Data Augmentation</h2>
+<p>This part defines the data augmentation function used in the code.</p>
+<pre><code>def augment(images,tr):</code></pre>
+<pre><code>    # augment function definition...</code></pre>
+</div>
+
+<!-- Part 6: Dataset Preparation and Data Loaders -->
+<div>
+<h2>Part 17: Dataset Preparation and Data Loaders</h2>
+<p>This part prepares the dataset and creates data loaders for training and testing.</p>
+<pre><code>transform = transforms.Compose([transforms.ToTensor(),transforms.Normalize([0.485, 0.456, 0.406],[0.229, 0.224, 0.225])])</code></pre>
+<pre><code>aug_face_trainset = Face_Dataset('dataset/train/aug',transform)</code></pre>
+<pre><code>aug_face_testset = Face_Dataset('dataset/test/aug',transform)</code></pre>
+<pre><code>aug_trainface_loader = torch.utils.data.DataLoader(aug_face_trainset, batch_size=64, shuffle=True, num_workers=2)</code></pre>
+<pre><code>aug_testface_loader = torch.utils.data.DataLoader(aug_face_testset, batch_size=64, shuffle=False, num_workers=2)</code></pre>
+</div>
+
+<!-- Part 7: Training and Evaluation Functions -->
+<div>
+<h2>Part 18: Training and Evaluation Functions</h2>
+<p>This part contains functions for training and evaluating the model.</p>
+<pre><code>def train_epoch(net: nn.Module, criterion: nn.Module, optimizer: torch.optim.Optimizer, dataloader: torch.utils.data.DataLoader,   accs_train ,loss_train):</code></pre>
+<pre><code>    # train_epoch function definition...</code></pre>
+<pre><code>def eval_epoch(net: nn.Module, criterion: nn.Module, dataloader: torch.utils.data.DataLoader,    accs_test ,loss_test ):</code></pre>
+<pre><code>    # eval_epoch function definition...</code></pre>
+</div>
+
+<!-- Part 8: Model Training -->
+<div>
+<h2>Part 19: Model Training</h2>
+<p>This part initializes the model, criterion, optimizer, and then trains the model.</p>
+<pre><code>device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")</code></pre>
+<pre><code>class lastLayer(nn.Module):</code></pre>
+<pre><code>    # lastLayer class definition...</code></pre>
+<pre><code>net = efficientnet_b2(weights=EfficientNet_B2_Weights.IMAGENET1K_V1)</code></pre>
+<pre><code>net.classifier = nn.Sequential()</code></pre>
+<pre><code>net = lastLayer(net).to(device)</code></pre>
+<pre><code>criterion = nn.CrossEntropyLoss().to(device)</code></pre>
+<pre><code>params_to_update = []</code></pre>
+<pre><code>for name,param in net.named_parameters():</code></pre>
+<pre><code>    params_to_update.append(param)</code></pre>
+<pre><code>optimizer = torch.optim.RMSprop(params_to_update, lr=5e-4)</code></pre>
+<pre><code>epochs = 20</code></pre>
+<pre><code>from time import time</code></pre>
+<pre><code>accs_train = []</code></pre>
+<pre><code>loss_train = []</code></pre>
+<pre><code>accs_test = []</code></pre>
+<pre><code>loss_test = []</code></pre>
+<pre><code>net.load_state_dict(torch.load("models/face_modal.pth"))</code></pre>
+<pre><code>for e in range(epochs):</code></pre>
+<pre><code>    start_time = time()</code></pre>
+<pre><code>    accs_train,loss_train = train_epoch(net, criterion, optimizer, aug_trainface_loader,accs_train,loss_train)</code></pre>
+<pre><code>    accs_test,loss_test = eval_epoch(net, criterion, aug_testface_loader,accs_test,loss_test)</code></pre>
+<pre><code>    if accs_test[-1]==max(accs_test):</code></pre>
+<pre><code>        torch.save(net.state_dict(), 'models/aug_face_modal.pth')</code></pre>
+<pre><code>    end_time = time()</code></pre>
+<pre><code>    print(f'Epoch {e+1:3} finished in {end_time - start_time:.2f}s')</code></pre>
+</div>
 
 <div>
-<h2>Third step: data augmentation</h2>
-<pre><code>from torch import nn</code>
-<code>import torch</code>
-<code>coefs = torch.rand(3)</code>
-<code>c= nn.Softmax(dim=0)(coefs)</code>
-<code>print(coefs)</code>
-<code>print(c)</code>
-<code>!pip install einops --upgrade</code>
-<code>import numpy as np</code>
-<code>import torch</code>
-<code>from einops import parse_shape, rearrange</code>
-<code>class RandomFilter(torch.nn.Module):</code>
-<code>    # Class definition...</code>
-<code>class RandomSmoothColor(torch.nn.Module):</code>
-<code>    # Class definition...</code>
-<code>class Diffeo(torch.nn.Module):</code>
-<code>    # Class definition...</code>
-<code>@functools.lru_cache()</code>
-<code>def scalar_field_modes(n, m, dtype=torch.float64, device='cpu'):</code>
-<code>    # scalar_field_modes function definition...</code>
-<code>def scalar_field(n, m, device='cpu'):</code>
-<code>    # scalar_field function definition...</code>
-<code>def deform(image, T, cut, interp='linear'):</code>
-<code>    # deform function definition...</code>
-<code>def remap(a, dx, dy, interp):</code>
-<code>    # remap function definition...</code>
-<code>def temperature_range(n, cut):</code>
-<code>    # temperature_range function definition...</code>
-<code>COLOURCURR = RandomSmoothColor(100,0.01).to(device)</code>
-<code>spectral = Diffeo(1., 1., 1., 1., 2, 100, 1.0).to(device)</code>
-<code>spatial = RandomFilter(3,1).to(device)</code>
-<code>def augment(images,tr):</code>
-<code>    # augment function definition...</code>
-<code>transform = transforms.Compose([transforms.ToTensor(),transforms.Normalize([0.485, 0.456, 0.406],[0.229, 0.224, 0.225])])</code>
-<code>aug_face_trainset = Face_Dataset('dataset/train/aug',transform)</code>
-<code>aug_face_testset = Face_Dataset('dataset/test/aug',transform)</code>
-<code>aug_trainface_loader = torch.utils.data.DataLoader(aug_face_trainset, batch_size=64, shuffle=True, num_workers=2)</code>
-<code>aug_testface_loader = torch.utils.data.DataLoader(aug_face_testset, batch_size=64, shuffle=False, num_workers=2)</code>
-<code>def train_epoch(net: nn.Module, criterion: nn.Module, optimizer: torch.optim.Optimizer, dataloader: torch.utils.data.DataLoader,   accs_train ,loss_train):</code>
-<code>    # train_epoch function definition...</code>
-<code>def eval_epoch(net: nn.Module, criterion: nn.Module, dataloader: torch.utils.data.DataLoader,    accs_test ,loss_test ):</code>
-<code>    # eval_epoch function definition...</code>
-<code>device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")</code>
-<code>class lastLayer(nn.Module):</code>
-<code>    # lastLayer class definition...</code>
-<code>net = efficientnet_b2(weights=EfficientNet_B2_Weights.IMAGENET1K_V1)</code>
-<code>net.classifier = nn.Sequential()</code>
-<code>net = lastLayer(net).to(device)</code>
-<code>criterion = nn.CrossEntropyLoss().to(device)</code>
-<code>params_to_update = []</code>
-<code>for name,param in net.named_parameters():</code>
-<code>    params_to_update.append(param)</code>
-<code>optimizer = torch.optim.RMSprop(params_to_update, lr=5e-4)</code>
-<code>epochs = 20</code>
-<code>from time import time</code>
-<code>accs_train = []</code>
-<code>loss_train = []</code>
-<code>accs_test = []</code>
-<code>loss_test = []</code>
-<code>net.load_state_dict(torch.load("models/face_modal.pth"))</code>
-<code>for e in range(epochs):</code>
-<code>    # Training loop...</code>
-<code>print(f'Best Accuracy :{max(accs_test) * 100.:.2f}%')</code>
-<code>plt.plot(np.array(loss_test), 'r')</code>
-<code>plt.plot(np.array(loss_train), 'b')</code>
-<code>plt.title('Face Model loss')</code>
-<code>plt.ylabel('Loss')</code>
-<code>plt.xlabel('Epoch')</code>
-<code>plt.legend(['Test', 'Train'])</code>
-<code>plt.show()</code>
-<code>plt.plot(np.array(accs_test), 'r')</code>
-<code>plt.plot(np.array(accs_train), 'b')</code>
-<code>plt.title('Face Model Accuracy')</code>
-<code>plt.ylabel('Accuracy')</code>
-<code>plt.xlabel('Epoch')</code>
-<code>plt.legend(['Test', 'Train'])</code>
-<code>plt.show()</code></pre>
+<h2>Part 20: Analyse and plot the result</h2>
+<p>In this part, we are trying to get best results and plot them. Final result are available in the notebook file.</p>
+<pre><code>print(f'Best Accuracy :{max(accs_test) * 100.:.2f}%')</code></pre>
+<pre><code>plt.plot(np.array(loss_test), 'r')</code></pre>
+<pre><code>plt.plot(np.array(loss_train), 'b')</code></pre>
+<pre><code>plt.title('Face Model loss')</code></pre>
+<pre><code>plt.ylabel('Loss')</code></pre>
+<pre><code>plt.xlabel('Epoch')</code></pre>
+<pre><code>plt.legend(['Test', 'Train'])</code></pre>
+<pre><code>plt.show()</code></pre>
+<pre><code>plt.plot(np.array(accs_test), 'r')</code></pre>
+<pre><code>plt.plot(np.array(accs_train), 'b')</code></pre>
+<pre><code>plt.title('Face Model Accuracy')</code></pre>
+<pre><code>plt.ylabel('Accuracy')</code></pre>
+<pre><code>plt.xlabel('Epoch')</code></pre>
+<pre><code>plt.legend(['Test', 'Train'])</code></pre>
+<pre><code>plt.show()</code></pre>
 </div>
+
 </body>
 </html>
+
+</body>
+</html>
+
