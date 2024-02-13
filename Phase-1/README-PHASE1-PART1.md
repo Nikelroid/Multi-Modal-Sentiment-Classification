@@ -1,11 +1,4 @@
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>README</title>
-</head>
-<body>
-<!-- Mount Google Drive -->
+
 <div>
 <h2>Part 0: Mount Google Drive</h2>
 <p>This code mounts Google Drive to the Colab environment. It's necessary for accessing files stored in Google Drive.</p>
