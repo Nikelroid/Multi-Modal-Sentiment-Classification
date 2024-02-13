@@ -1,9 +1,9 @@
 
 <body>
 
-<h1>Multi-Modal Sentiment Classification using PyTorch</h1>
+<h1>Phase1 - Part3 : Multi-Modal Visual Sentiment Classification</h1>
 
-<p>This repository contains code for multi-modal sentiment classification, where sentiments are predicted based on both textual and visual information. The code utilizes PyTorch for model training and evaluation.</p>
+<p>This repository contains code for multi-modal sentiment classification, where sentiments are predicted based on visual information. The code utilizes PyTorch for model training and evaluation.</p>
 
 <h2>Introduction</h2>
 
@@ -17,9 +17,7 @@
 
 <p>The dataset preprocessing involves organizing the data into appropriate directories and files. The provided code block handles data loading and preprocessing tasks, including downloading the dataset, extracting files, and organizing them into train, test, and dev sets.</p>
 
-<pre><code class="language-python">...
-<span class="token comment"># Data Preprocessing Code Block</span>
-<span class="token comment"># ...</span>
+<pre><code class="language-python">
 
 <span class="token comment"># Example: Loading and preprocessing the dataset</span>
 <span class="token keyword">from</span> google.colab <span class="token keyword">import</span> drive
