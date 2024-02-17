@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h1>Multi-Modal Sentiment Classification with PyTorch</h1>
+<h1>Multi-Modal Visual Sentiment Classification</h1>
 
 <p>This phase contains code for multi-modal visual sentiment classification using PyTorch. The project involves predicting sentiments from visual information. It includes data preprocessing, model architecture, training, and evaluation.</p>
 
