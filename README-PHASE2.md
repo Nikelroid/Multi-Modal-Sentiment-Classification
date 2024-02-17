@@ -4,7 +4,6 @@
 <p>In Phase 2 of the project, we delve into the realm of natural language processing (NLP), augmenting our multi-modal sentiment analysis pipeline. This phase encompasses the development of code for the text analysis component of the project. Here, we focus on training models to extract and process textual data (dialogs) from the dataset. Subsequently, we preprocess the text data to make it suitable for training, followed by the classification of text into three sentiment classes: positive, negative, and neutral. The integration of text analysis significantly enhances the functionality of the project, laying a strong foundation for subsequent phases. For the final results of this phase, please refer to Phase 3 of the project.</p>
 
 <h2>Contents</h2>
-
 <p>1- Loading dataset using dataloader</p>
 <p>2- Preprocessing text data</p>
 <p>3- Train by TF-IDF</p>
@@ -19,10 +18,9 @@
 
 <h2>Part 1: Loading dataset using DataLoader</h2>
 <p>
-    The dataset is loaded using a custom DataLoader class, <code>Text_MSCTD</code>, which inherits from <code>MSCTD_Dataset</code>. This class preprocesses the text data and allows for easy handling of the dataset during training and testing.
+    The dataset is loaded using a custom DataLoader class, <code>Text_MSCTD</code>, which inherits from <code>MSCTD_Dataset</code>. This class preprocesses the text data and allows for easy handling of the dataset during training and testing. We will change our Dataset class a bit in this part, to avoid the overhead of loading images.
 </p>
 <pre><code>
-# We will change our Dataset class a bit in this part, to avoid the overhead of loading images.
     class Text_MSCTD(MSCTD_Dataset):
         def __init__(self, dataset_dir, conversation_dir, texts, sentiments,
                     preprocess_func=None, pad_idx=None, max_len=None, transform=None, images_dir=''):
@@ -74,6 +72,7 @@
     UNK = '&lt;UNK&gt;' 
     lemmatizer = WordNetLemmatizer()
     stop_words = set(stopwords.words('english'))
+    
     def sent_preprocess(sent, lower=True, remove_punct=True, remove_stopwords=True,
                         lemmatize=True, handle_nums=True, handle_unknowns=True):
         if lower:
@@ -105,17 +104,13 @@
     The TF-IDF model is trained on the preprocessed text data using <code>TfidfVectorizer</code> from scikit-learn.
 </p>
 <pre><code>
-## TF-IDF
-    
-    from sklearn.feature_extraction.text import TfidfVectorizer
-    
+    from sklearn.feature_extraction.text import TfidfVectorizer 
     tfidf = TfidfVectorizer(analyzer=sent_preprocess)
     tfidf_data = tfidf.fit_transform(all_texts)
     tfidf_data = tfidf_data.toarray()
     tfidf.get_feature_names_out()
     print(len(all_texts))
     print(tfidf_data.shape)
-    
 </code></pre>
 
 
@@ -124,29 +119,26 @@
     The trained TF-IDF model is tested and evaluated on the test set, with metrics such as accuracy, precision, recall, and F1-score calculated.
 </p>
 <pre><code>
-    
     from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
-    
     average_policy = 'macro'
     metrics = {'accuracy': accuracy_score, 'precision': lambda y1, y2: precision_score(y1, y2, average=average_policy),
                'recall': lambda y1, y2: recall_score(y1, y2, average=average_policy),
                'f1': lambda y1, y2: f1_score(y1, y2, average=average_policy),
                'confusion_matrix': confusion_matrix}
     plt.figure(figsize=(10, 10))
-    
     def eval(y_true, y_pred, metrics=metrics, plot_confusion_matrix=True):
         metrics_values = {name: metric(y_true, y_pred) for name, metric in metrics.items()}
         if plot_confusion_matrix:
             ConfusionMatrixDisplay(metrics_values.pop('confusion_matrix')).plot()
         return metrics_values
-
+    
     # Train results:
     eval(all_labels, model.predict(tfidf_data))
     
     # Test results:
     test_tfidf_data = tfidf.transform(test_text).toarray()
     eval(test_labels, model.predict(test_tfidf_data))
-    </code></pre>
+</code></pre>
 
 
  <h2>Part 5: Use SVM in TF-IDF</h2>
@@ -154,9 +146,7 @@
     In this part, SVM (Support Vector Machine) classifier is applied to the TF-IDF vectors for classification.
 </p>
 <pre><code>
-    
     from sklearn import svm
-    
     model = Pipeline([('pca', PCA(n_components=100)), ('svm', svm.SVC())])
     model.fit(tfidf_data, all_labels)
     eval(all_labels, model.predict(tfidf_data))
@@ -170,7 +160,6 @@
 </p>
 <pre><code>
     from sklearn.base import TransformerMixin
-    
     # to convert sparse matrix to dense
     class DenseTransformer(TransformerMixin):
         def fit(self, X, y=None, **fit_params):
@@ -181,7 +170,6 @@
     from sklearn.linear_model import LogisticRegression
     from sklearn import preprocessing
     from sklearn.decomposition import PCA
-    
     all_sents = [sent_preprocess(text, remove_stopwords=False) for text in all_texts]
     reduced_tfidf = Pipeline([
         ('tfidf', TfidfVectorizer(analyzer=lambda x: x)),
@@ -197,18 +185,13 @@
     vocab_size = len(all_words)
     vocab_size
     UNK_IDX = word2idx[UNK]
-    
     def text_to_idxs(text):
         return [word2idx.get(word, UNK_IDX) for word in text]
-    
     def idxs_to_text(idxs):
         return [idx2word[idx] for idx in idxs]
-    
     all_sent_idxs = [text_to_idxs(sent) for sent in all_sents]
     word_embeddings = {idx: [] for idx in range(vocab_size)}
-    
     from tqdm import tqdm
-    
     num_epochs = 1
     
     for epoch in range(num_epochs):
@@ -225,7 +208,6 @@
                 svc = svm.SVC(kernel='linear')
                 svc.fit(data, labels)
                 word_embeddings[word].append(np.concatenate((svc.coef_[0], svc.intercept_)))
-    
     for word, embeddings in word_embeddings.items():
         word_embeddings[word] = np.mean(embeddings, axis=0)
 </code></pre>
@@ -237,16 +219,16 @@
 Note that we need an embedding for the sentence to be able to do that. So we will use the embedding of the words in the sentence, and average them to get the embedding of the sentence.
 </p>
 <pre><code>
-    
     sent_embeddings = [np.mean([word_embeddings[word] for word in sent], axis=0) for sent in all_sent_idxs]
     model = Pipeline([('prep', preprocessing.StandardScaler()), ('lr', LogisticRegression(max_iter=1000))])
     model.fit(sent_embeddings, all_labels)
+    
     # eval on train
     eval(all_labels, model.predict(sent_embeddings))
+    
     # eval on test
     test_sent_idxs = [text_to_idxs(sent_preprocess(text, remove_stopwords=False)) for text in test_text]
     test_sent_embeddings = [np.mean([word_embeddings[word] for word in sent], axis=0) for sent in test_sent_idxs]
-    
     eval(test_labels, model.predict(test_sent_embeddings))
     
 </code></pre>
@@ -257,10 +239,8 @@ Note that we need an embedding for the sentence to be able to do that. So we wil
     In this part, pretrained word embeddings from GloVe are loaded and used to represent words in the dataset.
 </p>
 <pre><code>
-    
     with open('glove.6B.50d.txt', 'r', encoding='utf-8') as f:
         lines = f.readlines()
-    
     word2vec = {}
     for line in lines:
         line = line.split()
@@ -275,10 +255,8 @@ Note that we need an embedding for the sentence to be able to do that. So we wil
     Pretrained BERT (Bidirectional Encoder Representations from Transformers) model is utilized for text classification tasks.
 </p>
 <pre><code>
-    
     !pip install transformers
     from transformers import BertForSequenceClassification
-    
     # Load the pretrained BERT model for sequence classification
     model = BertForSequenceClassification.from_pretrained(
         'bert-base-uncased',
@@ -295,7 +273,6 @@ Note that we need an embedding for the sentence to be able to do that. So we wil
     The pretrained BERT model is trained on the dataset for text classification.
 </p>
 <pre><code>
-    
     import torch
     import torch.nn as nn
     import torch.nn.functional as F
@@ -324,7 +301,6 @@ Note that we need an embedding for the sentence to be able to do that. So we wil
     The pretrained BERT model is evaluated on the test set to assess its performance for text classification.
 </p>
 <pre><code>
-    
     def evaluate(model, dataloader):
         model.eval()
         correct = 0
