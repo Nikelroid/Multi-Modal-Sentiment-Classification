@@ -5,17 +5,17 @@
 
 <h2>Contents</h2>
 
-1- Loading dataset using dataloader
-2- Preprocessing text data
-3- Train by TF-IDF
-4- Test and evaluation TF-IDF model
-5- Use svm in TF-IDF
-6- Train by Pseudo Word2Vec
-7- Test and evaluation Word2Vec model
-8- Using pretrained model
-9- Using pretrained BERT
-10- Train Pretraied
-11- Evaluate Pretrained
+<p>1- Loading dataset using dataloader</p>
+<p>2- Preprocessing text data</p>
+<p>3- Train by TF-IDF</p>
+<p>4- Test and evaluation TF-IDF model</p>
+<p>5- Use svm in TF-IDF</p>
+<p>6- Train by Pseudo Word2Vec</p>
+<p>7- Test and evaluation Word2Vec model</p>
+<p>8- Using pretrained model</p>
+<p>9- Using pretrained BERT</p>
+<p>10- Train Pretraied</p>
+<p>11- Evaluate Pretrained</p>
 
 <body>
 
