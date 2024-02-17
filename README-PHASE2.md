@@ -1,7 +1,7 @@
-<h1>MSCTD GitHub Repository README</h1>
+<h1>PHASE 2: Enhancing Multi-Modal Sentiment Analysis with Text Analysis</h1>
 
 <h2>Overview</h2>
-<p>This repository contains code for the Multimodal Sentiment Classification on Twitter Dataset (MSCTD). The dataset consists of images and corresponding text from Twitter conversations, along with sentiment labels. This README provides detailed information on how to use the code in this repository.</p>
+<p>In Phase 2 of the project, we delve into the realm of natural language processing (NLP), augmenting our multi-modal sentiment analysis pipeline. This phase encompasses the development of code for the text analysis component of the project. Here, we focus on training models to extract and process textual data (dialogs) from the dataset. Subsequently, we preprocess the text data to make it suitable for training, followed by the classification of text into three sentiment classes: positive, negative, and neutral. The integration of text analysis significantly enhances the functionality of the project, laying a strong foundation for subsequent phases. For the final results of this phase, please refer to Phase 3 of the project.</p>
 
 <h2>Contents</h2>
 
