@@ -38,7 +38,7 @@
   <li><a href="#bert-configuration">Bert Configuration</a></li>
   <li><a href="#define-final-model">Define Final Model</a></li>
   <li><a href="#train-final-model">Train Final Model</a></li>
-  <li><a href="#eval-final-model">Train Final Model</a></li>
+  <li><a href="#eval-final-model">Evaluation Final Model</a></li>
 </ul>
 
 <h2 id="define-models">1. Define Models</h2>
