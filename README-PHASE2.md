@@ -23,7 +23,6 @@
 </p>
 <pre><code>
 # We will change our Dataset class a bit in this part, to avoid the overhead of loading images.
-
     class Text_MSCTD(MSCTD_Dataset):
         def __init__(self, dataset_dir, conversation_dir, texts, sentiments,
                     preprocess_func=None, pad_idx=None, max_len=None, transform=None, images_dir=''):
@@ -31,8 +30,6 @@
             self.preprocess_func = preprocess_func
             self.pad_idx = pad_idx
             self.max_len = max_len
-
-    
         def __getitem__(self, idx):
             text = self.texts[idx]
             if self.preprocess_func is not None:
@@ -56,15 +53,13 @@
     Text data is preprocessed using various techniques such as lowercasing, removing punctuation and stopwords, lemmatization, handling numbers, and handling unknown words.
 </p>
 <pre><code>
-
     !pip install pyenchant
     import nltk
     import string
     from nltk.corpus import stopwords, wordnet
     from nltk.stem import WordNetLemmatizer
     from nltk.tokenize import word_tokenize
-    from nltk import pos_tag
-    
+    from nltk import pos_tag  
     import enchant
     english_dict = enchant.Dict("en_US")
     nltk.download('punkt')
@@ -76,12 +71,9 @@
     import torch.nn as nn
     import torch.nn.functional as F
     NUM = '&lt;NUM&gt;'
-    UNK = '&lt;UNK&gt;'
-    
+    UNK = '&lt;UNK&gt;' 
     lemmatizer = WordNetLemmatizer()
     stop_words = set(stopwords.words('english'))
-
-
     def sent_preprocess(sent, lower=True, remove_punct=True, remove_stopwords=True,
                         lemmatize=True, handle_nums=True, handle_unknowns=True):
         if lower:
@@ -104,8 +96,7 @@
             word_tokens = [NUM if is_number(w) else w for w in word_tokens]
         if handle_unknowns:
             word_tokens = [w if english_dict.check(w) else UNK for w in word_tokens]
-        return word_tokens
-        
+        return word_tokens  
 </code></pre>
 
 
