@@ -1,4 +1,4 @@
-# Multimodal Sentiment analysis
+# Multimodal Sentiment Analysis
 ## Sharif University of Technology <br/> EE Dept. <br/> Deep Learning Course<br/> Dr. E. Fatemizadeh
 
 **Participants**:<br/>
