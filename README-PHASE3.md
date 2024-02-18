@@ -388,6 +388,7 @@ eval_model((text_model, image_model), test_loader)
 
 <h2 id="define-final-model">4. Define Final Model</h2>
 <p>We define the final model architecture, consisting of a BERT model for text processing and an image model (EfficientNet-B2) for image processing. The last layer of the image model is replaced with a custom fully connected layer for multimodal fusion.</p>
+
 <code><pre>
 # Training
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
@@ -402,7 +403,6 @@ def train_model(models, dataloaders, num_epochs, criterion, optimizer, model_nam
 
 # Define hyperparameters and initialize the models
 <pre><code>
-
 LEARNING_RATE = 1e-4
 optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, image_model.parameters()), lr=LEARNING_RATE)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=1, verbose=True, factor=0.5)
@@ -412,13 +412,11 @@ EPOCH = 1  # Number of epochs for training
 
 # Train the model
 <pre><code>
-
 image_model, min_val_loss = train_model((text_model, image_model), (train_loader, val_loader), EPOCH, criterion, optimizer, model_name='drive/MyDrive/Deep Project/weakly_sup', scheduler=scheduler)
 </code></pre>
 
 # Save the trained models
 <pre><code>
-
 torch.save(image_model.state_dict(), 'drive/MyDrive/Deep Project/weak_sup.pt')
 torch.save(text_model.state_dict(), 'drive/MyDrive/Deep Project/bert_model_weak_sup.pt')
 </code></pre>
@@ -435,6 +433,7 @@ eval_model((text_model, image_model), test_loader)
 # Before training evaluation
 eval_model((text_model, image_model), test_loader)
 </code></pre>
+    
 # Define hyperparameters and initialize the models for training
 <pre><code>
 LEARNING_RATE = 1e-4
@@ -446,13 +445,11 @@ EPOCH = 1  # Number of epochs for training
     
 # Train the model
 <pre><code>
-
 image_model, min_val_loss = train_model((text_model, image_model), (train_loader, val_loader), EPOCH, criterion, optimizer, model_name='drive/MyDrive/Deep Project/weakly_sup', scheduler=scheduler)
 </code></pre>
 
 # Save the trained models
 <pre><code>
-
 torch.save(image_model.state_dict(), 'drive/MyDrive/Deep Project/weak_sup.pt')
 torch.save(text_model.state_dict(), 'drive/MyDrive/Deep Project/bert_model_weak_sup.pt')
 </code></pre>
@@ -467,10 +464,9 @@ eval_model((text_model, image_model), test_loader)
 <p>
   Finally, This part provides a comprehensive assessment of the final integrated model's performance on the test dataset, allowing you to gauge its effectiveness in making predictions based on both text and image inputs.
 </p>
-      <code><pre>
+<code><pre>
 #Evaluation of the final model
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
-
 def evaluate_final_model(models, test_loader):
     text_model, final_model = models
     final_model.eval()
