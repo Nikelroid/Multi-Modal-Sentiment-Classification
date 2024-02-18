@@ -324,19 +324,26 @@ test_loader = DataLoader(test_set, batch_size=60, shuffle=False)
 <h2 id="processing-text">2. Processing Text</h2>
 <p>Here, we perform preprocessing steps for the text data. This includes tokenization, removing punctuation, removing emojis, removing stopwords, lemmatization, handling numbers, and handling unknown words using the <code>pyenchant</code> library.</p>
 <pre><code>from transformers import BertForSequenceClassification
-
-#Load pretrained BERT model
+</code></pre>
+    
+# Load pretrained BERT model
+<pre><code>
 def load_pretrained_bert(name='bert_model.pt'):
     # Load pretrained BERT model
     # ...
     return model
+</code></pre>
 
-#Define last layer for multimodal fusion
+# Define last layer for multimodal fusion
+<pre><code>
 class lastLayer(nn.Module):
     # Definition of last layer for multimodal fusion
     # ...
+</code></pre>
 
-#Load pretrained image model
+# Load pretrained image model
+<pre><code>
+
 def load_pretrained_image(name ='scene_modal_en.pth'):
     # Load pretrained image model
     # ...
@@ -355,19 +362,25 @@ def load_pretrained_image(name ='scene_modal_en.pth'):
 def eval_model(models, loader, metrics=metrics, set_name='Test', plot_confusion_matrix=True):
     # Evaluation function definition
     # ...
+</code></pre>
 
 # Before training evaluation
+<pre><code>
 eval_model((text_model, image_model), test_loader)
 
 #Training
 EPOCH = 1
 image_model, min_val_loss = train_model((text_model, image_model), (train_loader, val_loader), EPOCH, criterion, optimizer, model_name='drive/MyDrive/Deep Project/weakly_sup', scheduler=scheduler)
+</code></pre>
 
-#Save trained models
+# Save trained models
+<pre><code>
 torch.save(image_model.state_dict(), 'drive/MyDrive/Deep Project/weak_sup.pt')
 torch.save(text_model.state_dict(), 'drive/MyDrive/Deep Project/bert_model_weak_sup.pt')
+</code></pre>
 
-#Evaluation after training
+# Evaluation after training
+<pre><code>
 eval_model((text_model, image_model), val_loader)
 eval_model((text_model, image_model), test_loader)
 </code></pre>
@@ -385,22 +398,33 @@ def one_epoch(models, loader, criterion, optimizer=None, epoch='', train=True, s
 
 def train_model(models, dataloaders, num_epochs, criterion, optimizer, model_name='pytroch-model', scheduler=None):
     # Function to train the model over multiple epochs
+</code></pre>
 
 # Define hyperparameters and initialize the models
+<pre><code>
+
 LEARNING_RATE = 1e-4
 optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, image_model.parameters()), lr=LEARNING_RATE)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=1, verbose=True, factor=0.5)
 criterion = DistillationLoss(alpha=0.5)
 EPOCH = 1  # Number of epochs for training
+</code></pre>
 
 # Train the model
+<pre><code>
+
 image_model, min_val_loss = train_model((text_model, image_model), (train_loader, val_loader), EPOCH, criterion, optimizer, model_name='drive/MyDrive/Deep Project/weakly_sup', scheduler=scheduler)
+</code></pre>
 
 # Save the trained models
+<pre><code>
+
 torch.save(image_model.state_dict(), 'drive/MyDrive/Deep Project/weak_sup.pt')
 torch.save(text_model.state_dict(), 'drive/MyDrive/Deep Project/bert_model_weak_sup.pt')
+</code></pre>
 
 # Evaluate the trained model
+<pre><code>
 eval_model((text_model, image_model), val_loader)
 eval_model((text_model, image_model), test_loader)
 </code></pre>
@@ -410,22 +434,31 @@ eval_model((text_model, image_model), test_loader)
 <code><pre>
 # Before training evaluation
 eval_model((text_model, image_model), test_loader)
-
+</code></pre>
 # Define hyperparameters and initialize the models for training
+<pre><code>
 LEARNING_RATE = 1e-4
 optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, image_model.parameters()), lr=LEARNING_RATE)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=1, verbose=True, factor=0.5)
 criterion = DistillationLoss(alpha=0.5)
 EPOCH = 1  # Number of epochs for training
-
+</code></pre>
+    
 # Train the model
+<pre><code>
+
 image_model, min_val_loss = train_model((text_model, image_model), (train_loader, val_loader), EPOCH, criterion, optimizer, model_name='drive/MyDrive/Deep Project/weakly_sup', scheduler=scheduler)
+</code></pre>
 
 # Save the trained models
+<pre><code>
+
 torch.save(image_model.state_dict(), 'drive/MyDrive/Deep Project/weak_sup.pt')
 torch.save(text_model.state_dict(), 'drive/MyDrive/Deep Project/bert_model_weak_sup.pt')
+</code></pre>
 
 # After training evaluation
+<pre><code>
 eval_model((text_model, image_model), val_loader)
 eval_model((text_model, image_model), test_loader)
 </code></pre>
@@ -434,7 +467,7 @@ eval_model((text_model, image_model), test_loader)
 <p>
   Finally, This part provides a comprehensive assessment of the final integrated model's performance on the test dataset, allowing you to gauge its effectiveness in making predictions based on both text and image inputs.
 </p>
-  <code><pre>
+      <code><pre>
 #Evaluation of the final model
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
 
@@ -442,36 +475,27 @@ def evaluate_final_model(models, test_loader):
     text_model, final_model = models
     final_model.eval()
     text_model.eval()
-
     Y_true = []
     Y_pred = []
-
     with torch.no_grad():
         for images, texts in test_loader:
             images = images.to(device)
             texts = texts.to(device)
-
             # Pass the images through the final model
             predictions = final_model(images, texts)
-
             # Get the predicted labels
             _, predicted = torch.max(predictions, 1)
-
             # Append true and predicted labels for evaluation
             Y_true.extend(texts.cpu().numpy())
-            Y_pred.extend(predicted.cpu().numpy())
-
-    # Calculate evaluation metrics
+            Y_pred.extend(predicted.cpu().numpy())   
     accuracy = accuracy_score(Y_true, Y_pred)
     precision = precision_score(Y_true, Y_pred, average='weighted')
     recall = recall_score(Y_true, Y_pred, average='weighted')
     f1 = f1_score(Y_true, Y_pred, average='weighted')
     confusion_mat = confusion_matrix(Y_true, Y_pred)
-
     # Display confusion matrix
     disp = ConfusionMatrixDisplay(confusion_mat)
     disp.plot()
-
     # Return evaluation metrics
     evaluation_results = {
         'accuracy': accuracy,
@@ -480,10 +504,11 @@ def evaluate_final_model(models, test_loader):
         'f1-score': f1,
         'confusion_matrix': confusion_mat
     }
-
     return evaluation_results
+</code></pre>
 
-#Evaluate the final model using the test loader
+# Evaluate the final model using the test loader
+<pre><code>
 final_model_evaluation = evaluate_final_model((text_model, final_model), test_loader)
 print("Final Model Evaluation Results:")
 print(final_model_evaluation)
