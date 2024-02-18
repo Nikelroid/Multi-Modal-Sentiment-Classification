@@ -4,17 +4,20 @@
 <p>In Phase 2 of the project, we delve into the realm of natural language processing (NLP), augmenting our multi-modal sentiment analysis pipeline. This phase encompasses the development of code for the text analysis component of the project. Here, we focus on training models to extract and process textual data (dialogs) from the dataset. Subsequently, we preprocess the text data to make it suitable for training, followed by the classification of text into three sentiment classes: positive, negative, and neutral. The integration of text analysis significantly enhances the functionality of the project, laying a strong foundation for subsequent phases. For the final results of this phase, please refer to Phase 3 of the project.</p>
 
 <h2>Contents</h2>
-<p>1- Loading dataset using dataloader</p>
-<p>2- Preprocessing text data</p>
-<p>3- Train by TF-IDF</p>
-<p>4- Test and evaluation TF-IDF model</p>
-<p>5- Use svm in TF-IDF</p>
-<p>6- Train by Pseudo Word2Vec</p>
-<p>7- Test and evaluation Word2Vec model</p>
-<p>8- Using pretrained model</p>
-<p>9- Using pretrained BERT</p>
-<p>10- Train Pretraied</p>
-<p>11- Evaluate Pretrained</p>
+<ol>
+  <li><a href="#load-dataset">Loading dataset using dataloader</a></li>
+  <li><a href="#preprocess">Preprocessing text data</a></li>
+  <li><a href="#train-tf">Train by TF-IDF</a></li>
+  <li><a href="#test-tf">Test and evaluation TF-IDF model</a></li>
+  <li><a href="#svm">Use SVM in TF-IDF</a></li>
+  <li><a href="#train-w2v">Train by Pseudo Word2Vec</a></li>
+  <li><a href="#test-w2v">Test and evaluation Word2Vec model</a></li>
+  <li><a href="#pre-model">Using pretrained model</a></li>
+  <li><a href="#pre-bert">Using pretrained BERT</a></li>
+  <li><a href="#train-pre">Train Pretraied</a></li>
+  <li><a href="#ev-pre">Evaluate Pretrained</a></li>
+</ol>
+
 
 <h2>Part 1: Loading dataset using DataLoader</h2>
 <p>
