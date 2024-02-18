@@ -462,8 +462,8 @@ eval_model((text_model, image_model), test_loader)
 
 <h2 id="eval-final-model">6. Evaluation Final Model</h2>
 <p>
-  Finally, This part provides a comprehensive assessment of the final integrated model's performance on the test dataset, allowing you to gauge its effectiveness in making predictions based on both text and image inputs.
-</p>
+  Finally, This part provides a comprehensive assessment of the final integrated model's performance on the test dataset, allowing you to gauge its effectiveness in making predictions based on both text and image inputs.</p>
+  
 <code><pre>
 #Evaluation of the final model
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
