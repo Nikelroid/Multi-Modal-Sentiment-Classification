@@ -32,14 +32,14 @@
 </ol>
 
 <h1>Table of Contents For Section 2</h1>
-<ul>
+<ol>
   <li><a href="#prepare-dataset">Prepare Dataset</a></li>
   <li><a href="#processing-text">Processing Text</a></li>
   <li><a href="#bert-configuration">Bert Configuration</a></li>
   <li><a href="#define-final-model">Define Final Model</a></li>
   <li><a href="#train-final-model">Train Final Model</a></li>
   <li><a href="#eval-final-model">Evaluation Final Model</a></li>
-</ul>
+</ol>
 
 <h2 id="define-models">1. Define Models</h2>
 <p>In this section, we define models for the project.</p>
