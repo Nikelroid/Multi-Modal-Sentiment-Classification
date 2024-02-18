@@ -4,13 +4,13 @@
 
 <h1>Phase 3: Combination two aproach of Multi-Modal sentiment</h1>
     <p>During this phase, we focus on integrating two crucial aspects of our project. The process unfolds in two main sections:</p>
-    <h2>1. Preparing and Training Models for Combination:</h2>
+    <h2><a href="#sec1">1. Preparing and Training Models for Combination:</h2>
     <ul>
         <li>In the initial section, we retrieve the pre-trained models from earlier phases.</li>
         <li>Following this, we meticulously prepare the data required for model fusion.</li>
         <li>Subsequently, we initiate the training process, where both models are combined and trained together.</li>
     </ul>
-   <h2>2. Model Integration and Evaluation:</h2>
+   <h2><a href="#sec2">2. Model Integration and Evaluation:</h2>
     <ul>
         <li>The second section is dedicated to merging the two models into a single, cohesive entity by defining a final model architecture.</li>
         <li>We then execute the training procedure for this unified model, aiming to enhance its performance.</li>
@@ -41,7 +41,8 @@
   <li><a href="#eval-final-model">Evaluation Final Model</a></li>
 </ol>
 
-<h2 id="define-models">1. Define Models</h2>
+<h1 id="sec1">Section 1:  Preparing and Training Models for Combination</h1>
+<h2 id="define-models">Part 1: Define Models</h2>
 <p>In this section, we define models for the project.</p>
 <p>The provided code defines models for BERT and EfficientNet.</p>
 
@@ -68,7 +69,7 @@ device
 </code></pre>
 
 
-<h2 id="load-models">2. Load models in earlier phases</h2>
+<h2 id="load-models">Part 2: Load models in earlier phases</h2>
 <p>This section focuses on loading models that were trained in earlier phases.</p>
 
 <h3>Load Pretrained BERT Model</h3>
@@ -96,7 +97,7 @@ def load_pretrained_image(name = 'models/scene_modal_en.pth'):
 </code></pre>
 
 
-<h2 id="get-embeded-vectors">3. Get Embedded Vectors from Earlier Phases</h2>
+<h2 id="get-embeded-vectors">Part 3: Get Embedded Vectors from Earlier Phases</h2>
 <p>In this section, we obtain embedded vectors from the models trained in earlier phases.</p>
 
 <h3>Step 1: Load Models Trained in Earlier Phases</h3>
@@ -157,7 +158,7 @@ with tqdm.tqdm(enumerate(train_loader), total=len(train_loader)) as pbar:
 </code></pre>
 
 
-<h2 id="define-model-architecture">4. Define Model Architecture</h2>
+<h2 id="define-model-architecture">Part 4: Define Model Architecture</h2>
 <p>In this section, we define the architecture of our multi-modal model.</p>
 
 <h3>MultiModalModel Definition</h3>
@@ -179,7 +180,7 @@ class MultiModalModel(nn.Module):
 </code></pre>
 
 
-<h2 id="training-transformer-model">5. Training Transformer Model</h2>
+<h2 id="training-transformer-model">Part 5: Training Transformer Model</h2>
 <p>In this section, we perform the training of the transformer model.</p>
 
 <h3>Training Configuration</h3>
@@ -196,7 +197,7 @@ criterion = nn.CrossEntropyLoss()
 </code></pre>
 
 
-<h2 id="evaluation-transformer-model">6. Evaluation Transformer Model</h2>
+<h2 id="evaluation-transformer-model">Part 6: Evaluation Transformer Model</h2>
 <p>This section focuses on evaluating the performance of the transformer model.</p>
 
 <h3>Evaluation</h3>
@@ -212,7 +213,7 @@ eval_model(model, test_loader)
 </code></pre>
 
 
-<h2 id="use-transformer-model-as-a-backbone">7. Use Transformer Model as a Backbone</h2>
+<h2 id="use-transformer-model-as-a-backbone">Part 7: Use Transformer Model as a Backbone</h2>
 <p>In this section, we utilize a transformer model as a backbone for our task.</p>
 
 <h3>Essential Imports</h3>
@@ -249,7 +250,7 @@ model = model.to(device)
 </code></pre>
 
 
-<h2 id="preparing-dataset">8. Preparing Dataset</h2>
+<h2 id="preparing-dataset">Part 8: Preparing Dataset</h2>
 <p>In this section, we prepare the dataset suitable for the transformer model.</p>
 
 <h3>Dataset Preparation</h3>
@@ -276,7 +277,7 @@ test_loader = DataLoader(testset, batch_size=TEST_BATCH_SIZE, shuffle=False)
 </code></pre>
 
 
-<h2 id="training-model">9. Training Model</h2>
+<h2 id="training-model">Part 9: Training Model</h2>
 <p>In this section, we train the transformer model using the prepared dataset.</p>
 
 <h3>Training Configuration</h3>
@@ -293,7 +294,7 @@ criterion = logit_bce()
 </code></pre>
 
 
-<h2 id="evaluation-model">10. Evaluation Model</h2>
+<h2 id="evaluation-model">Part 10: Evaluation Model</h2>
 <p>This section focuses on evaluating the performance of the trained transformer model.</p>
 
 <h3>Evaluation</h3>
@@ -308,7 +309,8 @@ model.load_state_dict(torch.load('models/visualbert-model.pt'))
 eval_model(model, test_loader)
 </code></pre>
 
-<h2 id="prepare-dataset">1. Prepare Dataset</h2>
+<h1 id="sec2">Section 2:  Model Integration and Evaluation</h1>
+<h2 id="prepare-dataset">Part 1: Prepare Dataset</h2>
 <p>In this part, we start by loading the dataset from a CSV file using pandas. We then define the device to be used (either CUDA GPU if available or CPU). Constants such as batch sizes, maximum length, epochs, learning rate, and model name are also defined. Additionally, we define a custom dataset class <code>MSCTD_Dataset</code> for handling the dataset, and transform functions for image data.</p>
 <pre><code># Bert configuration
 train_size = int(0.3 * len(dataset))
@@ -321,7 +323,7 @@ val_loader = DataLoader(val_set, batch_size=60, shuffle=False)
 test_loader = DataLoader(test_set, batch_size=60, shuffle=False)
 </code></pre>
 
-<h2 id="processing-text">2. Processing Text</h2>
+<h2 id="processing-text">Part 2: Processing Text</h2>
 <p>Here, we perform preprocessing steps for the text data. This includes tokenization, removing punctuation, removing emojis, removing stopwords, lemmatization, handling numbers, and handling unknown words using the <code>pyenchant</code> library.</p>
 <pre><code>from transformers import BertForSequenceClassification
 </code></pre>
@@ -351,7 +353,7 @@ def load_pretrained_image(name ='scene_modal_en.pth'):
 </code></pre>
 
 
-<h2 id="bert-configuration">3. Bert Configuration</h2>
+<h2 id="bert-configuration">Part 3: Bert Configuration</h2>
 <p>This part involves setting up the configuration for BERT. We split the dataset into train, validation, and test sets, define data loaders for each set, and perform BERT-specific preprocessing using the <code>BertTokenizer</code>.</p>
 <pre><code>from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
 
@@ -386,7 +388,7 @@ eval_model((text_model, image_model), test_loader)
 </code></pre>
 
 
-<h2 id="define-final-model">4. Define Final Model</h2>
+<h2 id="define-final-model">Part 4: Define Final Model</h2>
 <p>We define the final model architecture, consisting of a BERT model for text processing and an image model (EfficientNet-B2) for image processing. The last layer of the image model is replaced with a custom fully connected layer for multimodal fusion.</p>
 
 <code><pre>
@@ -427,7 +429,7 @@ eval_model((text_model, image_model), val_loader)
 eval_model((text_model, image_model), test_loader)
 </code></pre>
 
-<h2 id="train-final-model">5. Train Final Model</h2>
+<h2 id="train-final-model">Part 5: Train Final Model</h2>
 <p>Next, we train the combined model on the prepared dataset. We define training and evaluation functions, including metrics like accuracy, precision, recall, F1-score, and confusion matrix. The model is trained using an Adam optimizer with a learning rate scheduler, and the trained models are saved for later use. Evaluation is performed before and after training to assess the model's performance.</p>
 <code><pre>
 # Before training evaluation
@@ -460,7 +462,7 @@ eval_model((text_model, image_model), val_loader)
 eval_model((text_model, image_model), test_loader)
 </code></pre>
 
-<h2 id="eval-final-model">6. Evaluation Final Model</h2>
+<h2 id="eval-final-model">Part 6: Evaluation Final Model</h2>
 <p>
   Finally, This part provides a comprehensive assessment of the final integrated model's performance on the test dataset, allowing you to gauge its effectiveness in making predictions based on both text and image inputs.</p>
   
