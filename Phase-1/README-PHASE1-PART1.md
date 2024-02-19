@@ -1,6 +1,12 @@
 <div>
-<h1>Phase 1 - Part 1 : Preparing Facial Expression Recognition Pipeline and Data Augmentation</h1>
-<p> This code focuses on the initial steps of preparing data for a facial expression prediction model. The primary objective is to extract faces from images, a crucial step in accurately predicting facial expressions from images. By isolating and extracting facial regions, the subsequent model can focus solely on analyzing the features relevant to facial expressions, improving prediction accuracy.</p>
+<h1>Phase 1 - Part 1 : Face Extraction and Sentiment Prediction</h1>
+<p> In this part, our focus shifts towards extracting faces from images, a crucial step in understanding the nuanced emotional expressions conveyed by individuals within the scenes. By isolating and analyzing facial features, we aim to enrich the sentiment prediction process and capture the emotional dynamics present in the images.
+
+The README details the step-by-step process of extracting faces from the images, including saving and loading procedures to facilitate seamless data handling. Subsequently, it delves into the training of a dedicated model tailored to analyze facial expressions and predict the sentiment associated with each face detected.
+
+By leveraging advanced computer vision techniques, we equip the model with the ability to discern subtle emotional cues portrayed by individuals captured in the images. This enables us to enhance the overall sentiment prediction accuracy by incorporating insights derived from facial expressions.
+
+Users following the instructions provided in the README gain comprehensive insights into the intricacies of face extraction, model training, and sentiment prediction based on facial features. This foundational phase lays the groundwork for subsequent stages, where we integrate these insights with broader image sentiment analysis for a more comprehensive understanding of visual data.</p>
 </div>
 
 <div>
