@@ -1,8 +1,15 @@
 
 <body>
 
-<h1>Project Repository README</h1>
+<h1>Integrating Facial and Image Analysis for Sentiment Prediction in Visual Data</h1>
 
+<p>Our project focuses on combining two approaches for sentiment prediction from visual data: facial analysis and overall image analysis. We propose a multi-layer perceptron (MLP) model that effectively integrates the insights obtained from both modalities to achieve superior sentiment prediction accuracy.</p>
+
+<p>In this part of the project, we present the methodology and implementation details of the combined MLP model. We leverage deep learning techniques to extract features from facial expressions and overall image content separately. Subsequently, we design the MLP architecture to fuse these features in a synergistic manner, exploiting the complementary information offered by each modality.</p>
+
+<p>The README provides a comprehensive guide to understanding the process of combining facial and image analysis for sentiment prediction. It includes sections detailing data preprocessing, model architecture, training procedure, and evaluation metrics. By following the README, users can gain insights into our approach, replicate our experiments, and understand the rationale behind our methodology.</p>
+
+<p>Overall, our project contributes to advancing the field of sentiment analysis in visual data by demonstrating the effectiveness of integrating multiple modalities. This integration enables more nuanced and accurate predictions of sentiment, which has applications in various domains, including social media analytics, market research, and content recommendation systems.</p>
 <h2>Table of Contents</h2>
 <ol>
   <li><a href="#part1">Load and Save Data From Image and Face Sentiment</a></li>
