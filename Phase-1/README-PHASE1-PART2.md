@@ -1,6 +1,12 @@
 <div>
-<h1>Phase 1 - Phase 2 : Facial Expression Prediction Model Training Pipeline</h1>
-<p>This Python script orchestrates a comprehensive pipeline for training a facial expression prediction model using the Multi-Scene Character Text Dataset (MSCTD). Initially, the script sets up the environment by mounting Google Drive and navigating to the project directory. It then proceeds to download and organize the dataset, consisting of images and corresponding textual descriptions, essential for training the model. Leveraging the PyTorch library, the script defines a custom dataset class, MSCTD_Dataset, tailored to handle the dataset's structure and facilitate efficient data loading. Augmentation techniques such as resizing, normalization, and data shuffling are applied to enhance the dataset's diversity and improve model generalization. The pipeline encompasses model training and evaluation stages, employing a pre-trained EfficientNet-B2 architecture fine-tuned for facial expression prediction. Throughout training, performance metrics including accuracy and loss are monitored and visualized, enabling insightful analysis of the model's learning dynamics. Finally, the script saves the trained model weights for future use, ensuring reproducibility and scalability of the facial expression prediction solution.</p>
+<h1>Phase 1 - Phase 2 : Training a Model for Predicting Overall Image Sentiment</h1>
+<p>In this initial phase, our objective is to train a model capable of predicting the sentiment of entire images extracted from our dataset, which comprises scenes from movies. Specifically, we aim to infer the overall sentiment conveyed by an image by analyzing its visual characteristics, such as its mood and color composition.
+
+This part of the project focuses on leveraging machine learning techniques to extract meaningful features from the images, which encapsulate the essence of their emotional content. We employ image processing methods to capture the dominant mood and color palette of each scene, which serve as indicative cues for the underlying sentiment.
+
+The README provides detailed insights into the data preprocessing steps involved, including image loading and feature extraction. Additionally, it outlines the architecture and training procedure of the model tasked with predicting the overall sentiment of images. By following the instructions laid out in the README, users can gain a thorough understanding of how we preprocess the data and train the sentiment prediction model.
+
+Ultimately, this phase sets the foundation for subsequent stages of the project, where we delve deeper into analyzing finer-grained aspects of visual data, such as facial expressions, to enhance the accuracy and granularity of sentiment prediction.</p>
 </div>
 
 
