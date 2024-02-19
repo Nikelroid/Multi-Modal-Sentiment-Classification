@@ -1,7 +1,7 @@
 
 <body>
 
-<h1>Integrating Facial and Image Analysis for Sentiment Prediction in Visual Data</h1>
+<h1>Phase 1 - Phase 3 : Integrating Facial and Image Analysis for Sentiment Prediction in Visual Data</h1>
 
 <p>Our project focuses on combining two approaches for sentiment prediction from visual data: facial analysis and overall image analysis. We propose a multi-layer perceptron (MLP) model that effectively integrates the insights obtained from both modalities to achieve superior sentiment prediction accuracy.</p>
 
