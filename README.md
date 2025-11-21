@@ -81,7 +81,7 @@ This project is distributed under the MIT License. See `LICENSE` for more inform
 
 ## Contact/Support
 For questions or support, please open an issue in this repository or contact the original participants:
-* Ali Abbasi
 * Nima Kelidari
+* Ali Abbasi
 * Amir Ahmad Shafiee
 
